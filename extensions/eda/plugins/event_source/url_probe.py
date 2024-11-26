@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-"""url_check.py.
+"""url_probe.py.
 
 An ansible-rulebook event source plugin that polls a set of URLs and sends
 events with their status.
@@ -14,10 +14,13 @@ Arguments:
 
 Example:
 -------
-    - name: check web server
-      ansible.eda.url_check:
+    - name: wait for Home Assistant person state changes
+      runejuhl.unusual_ansible.url_probe:
         urls:
-          - http://44.201.5.56:8000/docs
+        - '{{ hass_baseurl }}/api/states/person.rune'
+        headers:
+          Authorization: 'Bearer {{ hass_token }}'
+          content-type: application/json
         delay: 10
 
 """
